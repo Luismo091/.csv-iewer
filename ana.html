@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Análisis de CSV</title>
+  <script>
+    // Función para leer el archivo CSV
+    function analyzeCSV() {
+      var fileInput = document.getElementById("csvFile");
+      var selectedColumn = document.querySelector("input[name='column']:checked").value;
+      var tableBody = document.querySelector("#dataTable tbody");
+      if (fileInput.files.length === 0) {
+        alert("Selecciona un archivo CSV primero.");
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var contents = e.target.result;
+        var lines = contents.split("\n");
+        // Obtener los encabezados de las columnas
+        var headers = lines[0].split(",");
+        // Buscar el índice de la columna seleccionada
+        var columnIndex = headers.indexOf(selectedColumn);
+        // Limpiar la tabla antes de mostrar los nuevos datos
+        tableBody.innerHTML = "";
+        for (var i = 1; i < lines.length; i++) {
+          var cells = lines[i].split(",");
+          var rowData = cells[columnIndex];
+          var row = document.createElement("tr");
+          var cell = document.createElement("td");
+          cell.textContent = rowData;
+          row.appendChild(cell);
+          tableBody.appendChild(row);
+        }
+      };
+      reader.readAsText(fileInput.files[0]);
+    }
+    // Función para cargar las opciones de columna desde el archivo CSV
+    document.addEventListener("DOMContentLoaded", function () {
+      var fileInput = document.getElementById("csvFile");
+      fileInput.addEventListener("change", function () {
+        var selectedFile = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var contents = e.target.result;
+          var lines = contents.split("\n");
+          var headers = lines[0].split(",");
+          var columnDiv = document.getElementById("column");
+          // Limpiar las opciones existentes
+          columnDiv.innerHTML = "";
+          // Agregar las opciones de columna al div
+          headers.forEach(function (header) {
+            var label = document.createElement("label");
+            label.className =
+              "btn btn-outline btn-outline-dashed btn-active-light-primary d-flex text-start p-6";
+            label.setAttribute("data-kt-button", "true");
+            // Crear el input de radio
+            var input = document.createElement("input");
+            input.type = "radio";
+            input.name = "column";
+            input.value = header;
+            input.className =
+              "form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1";
+            label.appendChild(input);
+            // Crear el span con el texto
+            var span1 = document.createElement("span");
+            span1.className = "ms-5";
+            var span2 = document.createElement("span");
+            span2.className = "fs-4 fw-bold text-gray-800 d-block";
+            span2.textContent = header;
+            span1.appendChild(span2);
+            label.appendChild(span1);
+            // Agregar el label al div
+            columnDiv.appendChild(label);
+          });
+        };
+        reader.readAsText(selectedFile);
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Selección y análisis de datos de CSV</h1>
+  <label for="csvFile">Seleccionar archivo CSV:</label>
+  <input type="file" id="csvFile" accept=".csv" />
+  <input type="radio" name="column" value="header" onchange="analyzeCSV()">
+  <div id="column"></div>
+  <button onclick="analyzeCSV()">Analizar</button>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</body>
+</html>
+

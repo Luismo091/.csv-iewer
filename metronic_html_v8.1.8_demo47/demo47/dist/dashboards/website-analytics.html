@@ -6527,10 +6527,11 @@
 							<!--end::Step 4-->
 							<!--begin::Step 5-->
 							<div class="stepper-item" data-kt-stepper-element="nav">
-								<h3 class="stepper-title">Completed</h3>
+								<h3 class="stepper-title">Finaliza</h3>
 							</div>
 							<!--end::Step 5-->
 						</div>
+
 						<!--end::Nav-->
 						<!--begin::Form-->
 						<form class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate"
@@ -6609,6 +6610,7 @@
 											</div>
 											<!--end::Radio-->
 										</div>
+
 										<!--end::Input row-->
 										<div class='separator separator-dashed my-5'></div>
 										<!--begin::Input row-->
@@ -6710,7 +6712,7 @@
 									<!--begin::Heading-->
 									<div class="pb-10 pb-lg-12">
 										<!--begin::Title-->
-										<h1 class="fw-bold text-dark">Sube tu .Csv</h1>
+										<h1 class="fw-bold text-dark">Sube tu .CSV</h1>
 										<!--end::Title-->
 										<!--begin::Description-->
 										<div class="text-muted fw-semibold fs-4">Recuerda separarlos por commas y
@@ -6727,7 +6729,8 @@
 										<!--begin::Dropzone-->
 										<script>
 											// Función para leer el archivo CSV
-											function analyzeCSV() {
+											function
+												analyzeCSV() {
 												var fileInput = document.getElementById("csvFile");
 												var selectedColumn = document.querySelector("input[name='column']:checked").value;
 												var tableBody = document.querySelector("#dataTable tbody");
@@ -6758,7 +6761,7 @@
 														// Incrementar la variable de filas
 														rowCount++;
 														// Si la variable es igual a 8, salir del bucle OPTIMIZACION XD
-														if (rowCount === 8) {
+														if (rowCount === 10) {
 															break;
 														}
 													}
@@ -6815,7 +6818,10 @@
 										<label for="csvFile">Seleccionar archivo CSV:</label>
 
 										<input type="file" id="csvFile" accept=".csv" />
-										<div id="column"></div>
+
+										<div id="column">
+											<div class='separator separator-dashed my-5'></div>
+										</div>
 
 
 										<!--end::Dropzone-->
@@ -7121,17 +7127,17 @@
 								<div>
 									<button type="button" class="btn btn-lg btn-primary"
 										data-kt-stepper-action="submit">
-										<span class="indicator-label">Submit
+										<span class="indicator-label">Agregar
 											<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
 												<span class="path1"></span>
 												<span class="path2"></span>
 											</i></span>
-										<span class="indicator-progress">Please wait...
+										<span class="indicator-progress">Subiendo....
 											<span
 												class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									</button>
 									<button type="button" class="btn btn-lg btn-primary" onclick="analyzeCSV()"
-										data-kt-stepper-action="next">Continue
+										data-kt-stepper-action="next">Continuar
 										<i class="ki-duotone ki-arrow-right fs-3 ms-1 me-0">
 											<span class="path1"></span>
 											<span class="path2"></span>
